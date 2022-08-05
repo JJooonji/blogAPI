@@ -2,17 +2,9 @@
 const express = require("express");
 const app = express();
 
-//몽고db 위치를 파악
-const connect = require("./schemas/db_connection");
-const mongoose = require("mongoose");
 require("dotenv").config();
-const { PORT, MONGODB_URL } = process.env;
-//몽고스db 연결
-connect();
+const { PORT } = process.env;
 
-//json이라는 규격의 body 데이터를 손쉽게 코드에서 사용할수 있게 도와주는 미들웨어
-//미들웨어가 들어오요청에 반응하기 위에서 get위에 있어야 한다.
-//위에서 아래로 코딩이 진행되기 때문
 app.use(express.json());
 
 
@@ -34,6 +26,6 @@ app.use("/", [postRouter, commentRouter, usersRouter,likeRouter]);
 
 
 //서버를 키켰을때의 보일 반응
-app.listen(5000, () => {
-  console.log(5000, "포트로 서버가 열렸어요!");
+app.listen(PORT, () => {
+  console.log(PORT, "포트로 서버가 열렸어요!");
 });

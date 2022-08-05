@@ -23,7 +23,7 @@ router.get("/comments/:postId", async (req, res) => {
   }
   //JS shorthand property(객체 초기자)
   res.json({
-    Comment,
+    Comment
   });
 });
 

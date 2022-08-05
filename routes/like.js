@@ -15,11 +15,11 @@ router.get("/post/like", authorization, async (req, res) => {
     return res.status(400).json({
       errorMessage: "좋아요한 게시물이 없습니다.",
     });
-  }
-  
+  };
+
   //like 데이터 베이스에서 로그인 유저 아이디가 좋아요한 postid를 출력
   const likedpostId = likedposts.map((table) => table.postId);
-  console.log(likedpostId); 
+  console.log(likedpostId);
 
   //post데이터 베이스 출력에서 postid 를 like 와 외부키로 연동시켜서 붙여넣기
   Post.hasMany(like, { foreignKey: "postId" });
@@ -34,20 +34,22 @@ router.get("/post/like", authorization, async (req, res) => {
   });
 
   let likedPosts = Posts.map((post) => {
-      return {
-        postId: post.postId,
-        userId: post.userId,
-        nickname: post.nickname,
-        title: post.title,
-        contents: post.contents,
-        likes: post.likes.length,
-      };
-    })
-  
+    return {
+      postId: post.postId,
+      userId: post.userId,
+      nickname: post.nickname,
+      title: post.title,
+      contents: post.contents,
+      likes: post.likes.length,
+    };
+  });
+
   //좋아요 높은순으로 정렬
-  res.json(likedPosts.sort(function(a, b) {
-      return b.likes- a.likes;
-    }))
+  res.json(
+    likedPosts.sort(function (a, b) {
+      return b.likes - a.likes;
+    })
+  );
 });
 
 //좋아요 기능 API ok
