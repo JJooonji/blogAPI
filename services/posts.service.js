@@ -25,5 +25,39 @@ class PostService {
       updatedAt: createPostData.updatedAt,
     };
   };
+  detailPost = async (postId)=>{
+    const detailpost = await this.postRepository.detailPost(postId)
+    // console.log(detailpost);
+    if(detailpost)
+    return {
+      postId: detailpost.null,
+      userId: detailpost.userId,
+      nickname: detailpost.nickname,
+      title: detailpost.title,
+      content: detailpost.content,
+      createdAt: detailpost.createdAt,
+      updatedAt: detailpost.updatedAt,
+
+    };
+  };
+  
+  ediPost = async(userId,postId,title,content) =>{
+    console.log(userId);
+    const ediepost = await this.postRepository.detailPost(postId);
+    if(ediepost)
+    
+    return await this.postRepository.ediPost(postId, title, content);
+    
+  }
+
+  delPost = async(userId,postId) =>{
+    console.log(userId)
+    const delpost = await this.postRepository.detailPost(postId);
+    if(delpost)
+
+    return await this.postRepository.delPost(postId);
+  }
+
 }
+  
 module.exports = PostService;
