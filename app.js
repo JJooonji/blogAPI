@@ -1,26 +1,24 @@
-//express 웹 프레임워크를 사용하겠다.
-const express = require('express');
-const app = express();
-
 require('dotenv').config();
+const express = require('express');
+const Http = require('http');
+const routes = require('./routes');
+const app = express();
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
 
+app.use(morgan('dev'));
+
+const http = Http.createServer(app);
+const port = process.env.PORT || 3000;
+
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cookieParser());
 
-//라우터가 응답을 받을수 있게 위치를 알려준다.
-const postRouter = require('./routes/post');
-const commentRouter = require('./routes/comment');
-const usersRouter = require('./routes/users');
-const likeRouter = require('./routes/like');
+app.use('/', routes);
 
-//'/'경로로 요청이 들어왔다면 보일 반응
-app.get('/', (req, res) => {
-  res.send('Welcome My Blog');
+http.listen(port, () => {
+  console.log(`Start listen Server: ${port}`);
 });
 
-//라우터를 사용하겠다.
-app.use('/', [postRouter, commentRouter, usersRouter, likeRouter]);
-
-//서버를 키켰을때의 보일 반응
-app.listen(process.env.PORT, () => {
-  console.log(process.env.PORT, '포트로 서버가 열렸어요!');
-});
+module.exports = http;
