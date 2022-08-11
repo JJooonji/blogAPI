@@ -35,8 +35,8 @@ class CommentRepository {
 
     //댓글 삭제
     deleteComment = async (commentId, comment) => {
-        const updateCommentData = await Comments.destroy({
-            where: {commentId, comment}
+        const deleteComment = await Comments.destroy({
+            where: {commentId}
         })
 
         return deleteComment;

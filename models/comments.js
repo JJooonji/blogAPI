@@ -18,8 +18,14 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       type: DataTypes.INTEGER
     },
-    userId: DataTypes.INTEGER,
-    postId: DataTypes.INTEGER,
+    userId: {
+      required: true,
+      type: DataTypes.INTEGER,
+    },
+    postId: {
+      required: true,
+      type: DataTypes.INTEGER,
+    },
     nickname: DataTypes.STRING,
     comment: DataTypes.STRING
   }, {

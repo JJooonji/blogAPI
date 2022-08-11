@@ -6,19 +6,16 @@ class CommentService {
     commentRepository = new CommentRepository();
     postRepository = new PostRepository();
 
-    //댓글작성//commentId, nickname, postId, 
-    postComments = async (comment) => {
-        //post에서 Id정보 불러오는 이름값 넣기
-        // const thisPost = await this.postRepository.findAllPosts(postId);
-        if(!thisPost) {
+    //댓글작성 
+    postComments = async (nickname, comment) => {
+        const ediepost = await this.postRepository.findAllPosts(postId);
+        if(!ediepost) {
             return { success: false, message: '게시글이 없습니다.'}
         }else if (comment === undefined){
             return { success: false, message: '댓글내용을 입력해주세요.'};
         } else {
             await this.commentRepository.postComments(
-            // postId,
-            // commentId,
-            // nickname,
+            nickname,
             comment
         )}
         
