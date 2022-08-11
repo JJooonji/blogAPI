@@ -6,9 +6,7 @@ class likeService {
   createlikeData = async (postId, userId) => {
     const checkedPost = await this.likeRepository.checkedPost(postId);
     if (!checkedPost) {
-      return res.status(400).json({
-        errorMessage: '존재하지 않는 게시물입니다.',
-      });
+      return { success: false, errorMessage: '존재하지 않는 게시물입니다.',};
     }
     const ckeckedliked = await this.likeRepository.checkedliked(postId, userId);
     console.log(ckeckedliked.length);
@@ -24,7 +22,7 @@ class likeService {
   getlikedPostData = async (userId) => {
     const likedposts = await this.likeRepository.findAllpostliked(userId);
     if (!likedposts.length) {
-      return { errorMessage: '좋아요한 게시물이 없습니다.' };
+      return { success: false, errorMessage: '좋아요한 게시물이 없습니다.' };
     }
     const likedpostId = likedposts.map((table) => table.postId);
     const Posts = await this.likeRepository.findAllposts(likedpostId);

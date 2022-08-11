@@ -13,8 +13,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   like.init(
     {
-      postId: DataTypes.INTEGER,
-      userId: DataTypes.INTEGER,
+      postId: {
+        required: true,
+        type: DataTypes.INTEGER,
+      },
+      userId: {
+        required: true,
+        type: DataTypes.INTEGER,
+      },
     },
     {
       sequelize,
