@@ -7,7 +7,11 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(authMiddleware, PostsController.getALlPosts)
-  .post(PostsController.createPost);
-
+  .get(PostsController.getALlPosts)
+  .post(authMiddleware,PostsController.createPost);
+router  
+  .route('/:postId')
+  .get(PostsController.detailPost)
+  .put(authMiddleware,PostsController.ediPost)
+  .delete(authMiddleware,PostsController.delPost);
 module.exports = router;

@@ -1,5 +1,5 @@
 config
-
+migrations1
 # Logs
 logs
 *.log
