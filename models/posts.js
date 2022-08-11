@@ -14,13 +14,25 @@ module.exports = (sequelize, DataTypes) => {
   Post.init(
     {
       postId: {
+        autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      userId: DataTypes.INTEGER,
-      nickname: DataTypes.STRING,
-      title: DataTypes.STRING,
-      contents: DataTypes.STRING,
+      userId: {
+        require:true,
+        type:DataTypes.INTEGER,
+      },
+      nickname: {
+        require:true,
+        type:DataTypes.STRING,
+      },
+      title: {
+        require:true,
+        type:DataTypes.STRING,
+      },
+      contents: {
+        type:DataTypes.STRING,
+      },
     },
     {
       sequelize,
@@ -29,3 +41,4 @@ module.exports = (sequelize, DataTypes) => {
   );
   return Post;
 };
+
