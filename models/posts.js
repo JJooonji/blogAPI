@@ -36,11 +36,11 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Posts",
     }
   );
-  //   Posts.associate = function (models) {
-  //     models.Posts.hasMany(models.Users, {
-  //       foreignKey: "userId",
-  //       onDelete: "cascade",
-  //     });
-  //   };
+    Posts.associate = function (models) {
+      models.Posts.hasMany(models.Users, {
+        foreignKey: "userId",
+        onDelete: "cascade",
+      });
+    };
   return Posts;
 };
